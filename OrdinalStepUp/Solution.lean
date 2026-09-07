@@ -89,10 +89,15 @@ open Ordinal
 
 universe u
 
+/-- A point of `2^κ`: under `𝒫(κ) ≃ 2^κ` these are sets of ordinals. -/
 abbrev SetOrd := Set Ordinal
+
 variable {n r : ℕ} {α β κ μ θ : Ordinal} {a b c : SetOrd} {𝒜 ℬ 𝒞 : Set SetOrd}
   {V : Type u} {wo wo' : WellOrder} {x : wo.α}
 
+/-- The discrepancy of `a` and `b`: the least ordinal at which the two sets
+differ. [dG21]'s `δ(a, b)`, and the quantity the whole construction is built
+from. Junk when `a = b`, where the symmetric difference is empty. -/
 noncomputable def disc (a b : SetOrd) : Ordinal := sInf (symmDiff a b)
 
 lemma disc_comm (a b : SetOrd) : disc a b = disc b a := by
@@ -109,7 +114,8 @@ lemma mem_iff_of_lt_disc (h : α < disc a b) : α ∈ a ↔ α ∈ b := by
 
 /-- The lexicographic order on sets of ordinals -/
 def LexLT (a b : SetOrd) : Prop := disc a b ∈ b \ a
-scoped infix:50 " ≺ " => LexLT
+
+@[inherit_doc LexLT] scoped infix:50 " ≺ " => LexLT
 
 /-- If `a` and `b` agree below `t`, `a` lacks the bit at `t` and `b` has it,
 then `t` is exactly `disc a b`. -/
@@ -243,6 +249,10 @@ agree everywhere along it, `K₁` if they disagree everywhere. The colouring onl
 ever needs to detect the *first* deviation, so the named exceptional classes
 are the two ways a pattern can start `0,1` or `1,0`. -/
 
+/-- The `j`-th bit of a chain's pattern: the lexicographic order puts the
+`j`-th consecutive pair the same way round as `≺w` does. A `FinChain` is
+`≺w`-increasing by construction, so this says exactly that the two orders
+agree at `j`. -/
 def AgreeAt (u : FinChain (n + 1)) (j : Fin n) : Prop := u j.castSucc ≺ u j.succ
   /- j.castSucc is j + 1 as a Fin (n + 1), i.e. a valid index. -/
 
@@ -413,6 +423,8 @@ since any two elements of `𝒜` are consecutive in some `r`-subset. -/
 def AllAgree (𝒜 : Set SetOrd) : Prop := 𝒜.Pairwise Agree
 /-- Every pair of `𝒜` disagrees: the same reading of `[𝒜]ʳ ⊆ K₁`. -/
 def AllDisagree (𝒜 : Set SetOrd) : Prop := 𝒜.Pairwise (¬ Agree · ·)
+/-- `𝒜` is homogeneous for agreement: either every pair agrees or every pair
+disagrees. This is what `[𝒜]ʳ ⊆ K₀` or `[𝒜]ʳ ⊆ K₁` amounts to. -/
 abbrev HomAgree (𝒜 : Set SetOrd) : Prop := AllAgree 𝒜 ∨ AllDisagree 𝒜
 
 /-- Lemma 4.16, at the level of pairs: if `𝒜` has order type `θ` and misses
