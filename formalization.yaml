@@ -1,0 +1,152 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4.
+
+version: "v0.4"
+
+project:
+  name: "Erdős–Rado negative stepping-up for ordinal order types"
+  description: >-
+    A Lean 4 formalisation of the Erdős–Rado negative stepping-up lemma in its
+    order-type form: if a colouring of the r-subsets of kappa has no
+    monochromatic subset of kappa of order type theta, then the stepped-up
+    colouring of the (r+1)-subsets of 2^kappa has none either, provided theta
+    is additively indecomposable (meaning a nontrivial power of the first
+    uncountable ordinal).
+
+    The construction compares two unrelated orders on 2^kappa -- an arbitrary
+    well-order, and the lexicographic order given by the first place two sets
+    differ -- and reads a colouring off the pattern of agreement between them
+    along a chain, together with the sequence of discrepancies. Two colours are
+    spent marking the chains where those patterns first deviate, and on the
+    well-behaved chains the colouring copies the given one along the
+    discrepancy map.
+  authors:
+    - "Bruno Jartoux"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Bruno Jartoux"
+
+
+sources:
+  - title: >-
+      "A partition calculus in set theory" by Erdős and Rado for readers from
+      the twenty-first century
+    authors:
+      - "David Joël de Graaf"
+    contributors:
+      - name: "Benedikt Löwe"
+        role: "thesis supervisor"
+    id: "https://eprints.illc.uva.nl/id/eprint/1797"
+    type: "thesis"
+    location: "Theorem 4.18"
+    relationship: "formalizes"
+    note: >-
+      Master of Logic thesis MoL-2021-07, ILLC, University of Amsterdam, 2021.
+      The presentation actually followed.
+    author_endorsement: "not-contacted"
+
+  - title: >-
+      Combinatorial Set Theory: Partition Relations for Cardinals
+    authors:
+      - "Paul Erdős"
+      - "András Hajnal"
+      - "Attila Máté"
+      - "Richard Rado"
+    id: "ISBN:978-0-444-86157-2"
+    type: "book"
+    location: "Section 24"
+    relationship: "background"
+    note: >-
+      Studies in Logic and the Foundations of Mathematics 106, North-Holland,
+      1984. Section 24 is where the negative stepping-up lemma is found, and
+      is the statement formalised as stepUp_noHomog. The formalisation follows
+      the modernised presentation of the thesis above rather than this text.
+
+  - title: "A partition calculus in set theory"
+    authors:
+      - "Paul Erdős"
+      - "Richard Rado"
+    id: "doi:10.1090/S0002-9904-1956-10036-0"
+    type: "article"
+    relationship: "background"
+    note: >-
+      Bulletin of the American Mathematical Society 62 (1956), 427–489. The
+      original paper that the thesis above modernises. No locator is given
+      because the thesis modernises the paper as a whole rather than one
+      result of it.
+
+
+related_formalizations: []
+
+classification:
+  arxiv: ["math.LO", "math.CO"]
+  # 03E02 Partition relations; 05D10 Ramsey theory
+  msc2020: ["03E02", "05D10"]
+
+
+status:
+  scope: >-
+    Formalization of Theorem 4.18 in (de Graaf 2021), with no sorry and no axioms beyond propext,
+    Classical.choice and Quot.sound.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+  main_results:
+  - declaration: "OrdinalStepUp.ErdosRado.noHomog_stepUp"
+    file: "OrdinalStepUp/ErdosRado.lean"
+    sorry_count: 0
+    axioms: ["propext", "Classical.choice", "Quot.sound"]
+    comparator_config: "comparator.json"
+    literature_dependencies: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["claude-opus-5"]
+      framework: "Claude Code"
+      cost:
+        wall_time: "approx. 3 days"
+        spend_usd: "subscription-based usage"
+        hardware: "local machine"
+  spend_usd: "subscription-based usage"
+  notes: "iterative development via agent-human 'conversation'"
+
+fidelity:
+  divergences: >-
+    Colourings are total functions on all of Finset Ordinal, rather than 
+    partial functions defined on the r-subsets of the ground set; their values
+    elsewhere are immaterial and unconstrained. Since the colourings are total,
+    kappa is not an ambient type but a bound on the sets quantified over: 
+    subsets of Set.Iio kappa downstairs, and of its powerset upstairs.
+
+    Order types upstairs are taken with respect to an arbitrary well-order on
+    the powerset, obtained from well-ordering; the proof never uses which.
+
+    The source's theta^- correction, needed there because a successor-length
+    homogeneous set has a top point contributing no discrepancy, is
+    unnecessary here: indecomposability forces theta to be a limit, so every
+    point of such a set has a successor in it.
+
+
+review:
+  status: "self-assessed"
+  reviewers: []
+
+alignment:
+  namespace: "OrdinalStepUp.ErdosRado"
+  statements:
+    - source: "de Graaf 2021, Theorem 4.18"
+      lean: "OrdinalStepUp.ErdosRado.stepUp_noHomog"
+      module: "OrdinalStepUp.ErdosRado"
+      status: "proved"
+    - source: "de Graaf 2021, Theorem 4.18, as a negative partition arrow"
+      lean: "OrdinalStepUp.ErdosRado.noHomog_stepUp"
+      module: "OrdinalStepUp.ErdosRado"
+      status: "proved"
+      note: >-
+        Corollary phrasing, existentially quantifying the stepped-up colouring
+        and recording that the colour count is unchanged. Stated for the
+        Challenge/Solution split, since it mentions no construction.
+
+acknowledgements: >-
+  Lean 4 and Mathlib, and their contributors.

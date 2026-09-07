@@ -1,0 +1,20 @@
+{
+  "challenge_module": "OrdinalStepUp.Challenge",
+  "solution_module": "OrdinalStepUp.ErdosRado",
+  "theorem_names": [
+    "OrdinalStepUp.ErdosRado.noHomog_stepUp"
+  ],
+  "definition_names": [
+    "OrdinalStepUp.ErdosRado.WO",
+    "OrdinalStepUp.ErdosRado.ordWO",
+    "OrdinalStepUp.ErdosRado.Mono",
+    "OrdinalStepUp.ErdosRado.otpOf",
+    "OrdinalStepUp.ErdosRado.NoHomogOrd",
+    "OrdinalStepUp.ErdosRado.NoHomog"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ]
+}
