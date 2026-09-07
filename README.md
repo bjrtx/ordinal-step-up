@@ -17,12 +17,12 @@ Partition Relations for Cardinals*, North-Holland 1984.
 
 | path | |
 |---|---|
-| `OrdinalStepUp/ErdosRado.lean` | the development, importing nothing but Mathlib |
+| `OrdinalStepUp/Solution.lean` | the development, importing nothing but Mathlib |
 | `OrdinalStepUp/Challenge.lean` | the same statement with a `sorry`, for Comparator |
 | `comparator.json` | names the declarations Comparator compares |
 | `formalization.yaml` | submission metadata (formalization.yaml v0.4) |
 
-`ErdosRado.lean` serves as the Solution directly, so Comparator checks the
+`Solution.lean` serves as the Solution directly, so Comparator checks the
 development itself rather than a restatement of it. The two files declare the
 same six definitions and the same theorem, and `#print` of each agrees byte for
 byte under `pp.universes` and `pp.numericTypes`.

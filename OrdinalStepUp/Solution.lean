@@ -508,10 +508,7 @@ lemma exists_wo_gt
   exact ⟨w, hw.1, hw.2⟩
 
 /-- No set of full order type has its discrepancy going *down* across every
-triple. [dG21] runs an `ω`-sequence and points at the infinite descent;
-one step suffices instead. Take the least discrepancy realised in the set --
-`θ` sets have no greatest element, so there is a point above its top, and it
-produces a smaller one. -/
+triple. -/
 lemma not_all_down
     (d : wo.α → wo.α → Ordinal) {𝒞 : Set _} (hC : IsIndec (otpOf wo 𝒞))
     (hdown : ∀ a ∈ 𝒞, ∀ b ∈ 𝒞, ∀ c ∈ 𝒞, wo.r a b → wo.r b c → d b c < d a b) : False := by
@@ -527,14 +524,7 @@ lemma not_all_down
 
 The two hypotheses are [dG21]'s (i) and (ii): `[𝒜]ʳ ∩ P(0,1) = ∅` says no
 four-chain has its discrepancy go up then down, which -- since `hne` rules out
-ties -- is the implication "up forces up again"; (ii) is the mirror.
-
-[dG21] picks a maximal alternating chain and works from its top three
-elements. That is not needed. In case (i) `up` propagates rightwards, and one
-`up` triple must exist because `not_all_down` forbids the alternative, so
-everything above that triple is `up`. In case (ii) `down` propagates the same
-way, so a single `down` triple would make a whole final segment `down`, which
-`not_all_down` forbids outright -- leaving `𝒜` itself already all-`up`. -/
+ties -- is the implication "up forces up again"; (ii) is the mirror. -/
 theorem exists_all_up
     (d : wo.α → wo.α → Ordinal) {𝒜 : Set _} (hA : IsIndec (otpOf wo 𝒜))
     (hne : ∀ a ∈ 𝒜, ∀ b ∈ 𝒜, ∀ c ∈ 𝒜, wo.r a b → wo.r b c → d a b ≠ d b c)
@@ -593,13 +583,7 @@ theorem exists_all_disc_up (hA : IsIndec (otp 𝒜)) (hom : HomAgree 𝒜)
 Lemma 4.14 transfers a homogeneous set `𝒟 ⊆ 2^κ` for the stepped-up colouring
 back down to a homogeneous set `𝒜 ⊆ κ` for the original one, by sending `𝒟`'s
 increasing enumeration `⟨h_ξ⟩` to the discrepancies
-`δ_ξ = disc (h_ξ) (h_{ξ+1})` of its consecutive pairs. Two facts about `P₀`
-make that work, and neither mentions the enumeration:
-
-* skipping ahead does not move a discrepancy (`disc_eq_of_allUp`), which is
-  what identifies `{δ_{ξ_i}}` with `σ {h_{ξ_i}}`;
-* discrepancies of disjoint pairs compare (`disc_lt_disc_of_allUp`), which is
-  what makes `ξ ↦ δ_ξ` strictly increasing, hence order type preserving. -/
+`δ_ξ = disc (h_ξ) (h_{ξ+1})` of its consecutive pairs. -/
 
 /-- On an all-`up` set, skipping ahead does not move a discrepancy: the pair
 `a, c` parts company exactly where `a` and its nearer companion `b` do. This is
@@ -623,8 +607,7 @@ lemma disc_lt_disc_of_allUp
   · exact lt_trans (hB a ha b hb c hc hab hbc) (hB b hb c hc e he hbc hce)
 
 /-- A map that is strictly increasing on `𝒜` is an order isomorphism onto its
-image, so it carries the order type across unchanged. Injectivity is not a
-separate hypothesis: it follows from strict monotonicity and trichotomy. -/
+image, so it carries the order type across unchanged. -/
 lemma otpOf_image {𝒜 : Set _} {f} (hf : ∀ a ∈ 𝒜, ∀ b ∈ 𝒜, wo.r a b → wo'.r (f a) (f b)) :
     otpOf wo' (f '' 𝒜) = otpOf wo 𝒜 := by
   have hmono : ∀ a b : {x // x ∈ 𝒜}, Subrel wo.r (· ∈ 𝒜) a b →
@@ -670,8 +653,7 @@ noncomputable def discNext (𝒜 : Set SetOrd) (a : SetOrd) : Ordinal :=
 
 
 /-- On a `P₀`-homogeneous set the next-point discrepancy is the discrepancy to
-*any* later point of the set. This is what lets a chain's `σ` be read off the
-`discNext` values of its first `r - 1` points, and it is the step [dG21]
+*any* later point of the set. This is the step [dG21]
 takes with Observation 4.2 after checking `δ_{ξᵢ} < δ(h_{ξᵢ+1}, h_{ξᵢ₊₁})`. -/
 lemma discNext_eq
     (hup : ∀ a ∈ 𝒜, ∀ b ∈ 𝒜, ∀ c ∈ 𝒜, a ≺w b → b ≺w c → disc a b < disc b c)
@@ -706,12 +688,7 @@ lemma wo_of_discNext_lt (hA : IsIndec (otp 𝒜))
 
 /-- Lemma 4.14, order-type half. On a `P₀`-homogeneous set of type `θ` the map
 "discrepancy to the next point" is strictly increasing, so its image -- the
-source's `𝒜 ⊆ κ` -- has the same order type.
-
-[dG21] has to write `θ⁻`, the predecessor of `θ` when there is one, because
-a successor-length `𝒟` has a top point contributing no discrepancy. That
-correction is unnecessary here: indecomposability forces `θ` to be a limit, so
-`𝒟` has no greatest element and every point genuinely has a next one. -/
+source's `𝒜 ⊆ κ` -- has the same order type. -/
 theorem otpOrd_discNext_image (hA : IsIndec (otp 𝒜))
     (hup : ∀ a ∈ 𝒜, ∀ b ∈ 𝒜, ∀ c ∈ 𝒜, a ≺w b → b ≺w c → disc a b < disc b c) :
     otpOrd (discNext 𝒜 '' 𝒜) = otp 𝒜 :=
@@ -945,9 +922,7 @@ lemma iterNext_strictMono {𝒜 : Set SetOrd} {x : SetOrd} (hA : IsIndec (otp �
     · exact iterNext_lt_succ hA hx j
 
 /-- Any nonempty chain of a set of full order type is the front of a chain of
-any greater length: keep the head and pad above its top by iterating `nextIn`.
-This is what turns Theorem 4.18's hypotheses about `(r+1)`-sets into the
-shorter chain statements the lemmas below consume. -/
+any greater length: keep the head and pad above its top by iterating `nextIn`.-/
 lemma exists_chain_head {𝒜 : Set SetOrd} {j L : ℕ} (hA : IsIndec (otp 𝒜))
     (hjL : j + 1 ≤ L) (v : Fin (j + 1) → SetOrd) (hv : ∀ i, v i ∈ 𝒜)
     (hvmono : ∀ i i' : Fin (j + 1), i < i' → v i ≺w v i') :
@@ -1046,7 +1021,6 @@ lemma inK_of_homog (h : HomAgree ℬ)
     {u : FinChain (n + 1)} (hu : ∀ i, u i ∈ ℬ) : (InK0 ⊔ InK1) u :=
   h.imp (inK0_of_allAgree · hu) (inK1_of_allDisagree · hu)
 
-
 /-- A four-chain of `𝒜` is the front of a chain of length `n + 4`, at the
 literal indices `0, 1, 2, 3` that `InK01` and `InP01` read. -/
 lemma exists_chain_of_four (hA : IsIndec (otp 𝒜))
@@ -1076,8 +1050,7 @@ lemma exists_chain_of_four (hA : IsIndec (otp 𝒜))
 
 `InK01` and `InP01` look only at a chain's first few points, so once a
 four-chain has been padded out to length `n + 4` its classification is
-determined by the four points it started from. These two lemmas do that
-bookkeeping once. -/
+determined by the four points it started from. -/
 
 lemma agreeAt_of_four {u : FinChain (n + 4)}
     (h0 : u 0 = a) (h1 : u 1 = b) (h2 : u 2 = c) :
@@ -1121,10 +1094,7 @@ lemma no_pattern10_of_no_inK10 (hA : IsIndec (otp 𝒜))
   obtain ⟨e0, e1⟩ := agreeAt_of_four h0 h1 h2
   exact h u hu ⟨hdis ∘ e0.1, e1.2 hag⟩
 
-/-- Lemma 4.17's hypothesis (i), from `[𝒜]ⁿ⁺⁴ ∩ P(0,1) = ∅`. Homogeneity does
-two jobs here: it supplies `P(0,1)`'s `K` conjunct, and it rules out ties
-between consecutive discrepancies, which is what turns the failure of
-`δ(b,c) < δ(c,e)` into the strict `δ(c,e) < δ(b,c)`. -/
+/-- Lemma 4.17's hypothesis (i), from `[𝒜]ⁿ⁺⁴ ∩ P(0,1) = ∅`. -/
 lemma up_forces_up_of_no_inP01 (hA : IsIndec (otp 𝒜))
     (hom : HomAgree 𝒜)
     (h : ∀ u : FinChain (n + 4), (∀ i, u i ∈ 𝒜) → ¬ InP01 u) :
@@ -1165,8 +1135,7 @@ lemma allUp_of_inP0 (hA : IsIndec (otp 𝒜))
 
 /-- A chain is recovered from its own finite set: the increasing enumeration
 is unique. Both lists are `WOle`-sorted and permutations of one another, and
-`WOle` is antisymmetric, so they are equal. This is the direction of the
-bridge that `toFinset_chainOfFinset` does not give. -/
+`WOle` is antisymmetric, so they are equal. -/
 lemma chainOfFinset_toFinset (u : FinChain n) :
     chainOfFinset u.toFinset u.card_toFinset = u := by
   have hlist : u.toFinset.sort WOle = List.ofFn u := by
@@ -1198,13 +1167,7 @@ make its discrepancies rise — and on the result the colouring is literally
 hypothesis. -/
 
 /-- No colour of `f` has a homogeneous subset of `κ` of order type `θ`: the
-negative arrow `κ ↛ (θ)ʳ`.
-
-The bound `𝒜 ⊆ κ` is what makes this a statement about `κ`, and it cannot be
-dropped: quantifying over all sets of ordinals would not generalise the
-definition but strengthen it out of existence, since sets of type `θ` occur
-arbitrarily high up and the *positive* Erdős-Rado theorem makes one of them
-homogeneous. -/
+negative arrow `κ ↛ (θ)ʳ`. -/
 def NoHomogOrd (κ : Ordinal) (f : Finset Ordinal → Set.Iio μ) (r : ℕ) (θ : Ordinal) : Prop :=
   ∀ 𝒜 : Set Ordinal, 𝒜 ⊆ Set.Iio κ → otpOf ordWO 𝒜 = θ → ∀ ι, ¬ Mono f r 𝒜 ι
 
@@ -1214,19 +1177,18 @@ def NoHomog (κ : Ordinal) (f : Finset (Set Ordinal) → Set.Iio μ) (r : ℕ) (
     ∀ ι, ¬ Mono f r 𝒜 ι
 
 /-- The two colours stepping up reserves for itself. They exist as soon as
-there are two colours at all, which is exactly what `1 < μ` says; with colours
-taken in `Set.Iio μ` they are literally the ordinals `0` and `1`. -/
+there are two colours at all, meaning `1 < μ`. -/
 def colour₀ (hμ : 1 < μ) : Set.Iio μ := ⟨0, zero_lt_one.trans hμ⟩
 
 @[inherit_doc colour₀]
 def colour₁ (hμ : 1 < μ) : Set.Iio μ := ⟨1, hμ⟩
 
-/-- The two reserved colours are distinct: that is the whole content of `1 < μ`. -/
+/-- The two reserved colours are distinct. -/
 lemma colour₀_ne_colour₁ (hμ : 1 < μ) : colour₀ hμ ≠ colour₁ hμ :=
   fun h => zero_ne_one (congrArg Subtype.val h)
 
 open scoped Classical in
-/-- The stepped-up colouring `J`, the heart of the construction. A chain is
+/-- The stepped-up colouring. A chain is
 looked at through its two patterns, and gets:
 
 * colour `1` if it deviates *first one way* — `ε`-pattern beginning `0,1`, or
@@ -1259,7 +1221,7 @@ The three cases are [dG21]'s. Colour `1` is the one that absorbs `K(0,1)`
 and `P(0,1)`, so a homogeneous set for it must avoid `K(1,0)` and then
 `P(1,0)`; every other colour must avoid `K(0,1)` and `P(0,1)` instead. Either
 way Lemma 4.16 delivers a `K`-homogeneous `ℬ`, Lemma 4.17 an all-rising `𝒞`
-inside it, and on `𝒞` the colouring is literally `g ∘ σ`, so Lemma 4.14 hands
+inside it, and on `𝒞` the colouring is `g ∘ σ`, so Lemma 4.14 hands
 back a homogeneous set downstairs -- which was assumed not to exist. -/
 theorem stepUp_noHomog {g : Finset Ordinal → Set.Iio μ} (hμ : 1 < μ) (hθ : IsIndec θ)
     (hg : NoHomogOrd κ g (n + 3) (θ)) :
@@ -1331,14 +1293,7 @@ theorem stepUp_noHomog {g : Finset Ordinal → Set.Iio μ} (hμ : 1 < μ) (hθ :
 /-- **Theorem 4.18 as a negative partition arrow.** If `κ ↛ (ω^α)ʳ⁺³_μ` is
 witnessed by some colouring of the `(r+3)`-subsets of `κ`, then
 `2^κ ↛ (ω^α)ʳ⁺⁴_μ` holds one level up -- with the *same* number of colours,
-since stepping up reuses `0` and `1` rather than introducing any.
-
-This is the form a partition-calculus reader expects, and the one that makes
-the statement self-contained: only `otp`, `otpOrd` and `Mono` occur in it, not
-the stepped-up colouring, which is existentially quantified away. Colourings
-take values in `Set.Iio μ`, so "uses fewer than `μ` colours" is carried by the
-type rather than by a side condition, and `κ` bounds the two vertex sets:
-subsets of `κ` downstairs, subsets of `𝒫(κ)` upstairs. -/
+since stepping up reuses `0` and `1` rather than introducing any. -/
 theorem noHomog_stepUp {μ α : Ordinal} (hα : 0 < α) (hμ : 1 < μ)
     (h : ∃ g : Finset Ordinal → Set.Iio μ, NoHomogOrd κ g (r + 3) (ω^α)) :
     ∃ f : Finset (Set Ordinal) → Set.Iio μ, NoHomog κ f (r + 4) (ω^α) := by

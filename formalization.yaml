@@ -98,7 +98,7 @@ status:
   axioms: ["propext", "Classical.choice", "Quot.sound"]
   main_results:
   - declaration: "OrdinalStepUp.ErdosRado.noHomog_stepUp"
-    file: "OrdinalStepUp/ErdosRado.lean"
+    file: "OrdinalStepUp/Solution.lean"
     sorry_count: 0
     axioms: ["propext", "Classical.choice", "Quot.sound"]
     comparator_config: "comparator.json"
@@ -141,7 +141,7 @@ alignment:
   namespace: "OrdinalStepUp.ErdosRado"
   # Plain-language account of the six definitions Comparator compares
   # alongside the theorem. All six are declared identically in
-  # OrdinalStepUp/Challenge.lean and OrdinalStepUp/ErdosRado.lean.
+  # OrdinalStepUp/Challenge.lean and OrdinalStepUp/Solution.lean.
   definitions:
     - lean: "WO"
       reads: >-
@@ -172,11 +172,11 @@ alignment:
   statements:
     - source: "de Graaf 2021, Theorem 4.18"
       lean: "OrdinalStepUp.ErdosRado.stepUp_noHomog"
-      module: "OrdinalStepUp.ErdosRado"
+      module: "OrdinalStepUp.Solution"
       status: "proved"
     - source: "de Graaf 2021, Theorem 4.18, as a negative partition arrow"
       lean: "OrdinalStepUp.ErdosRado.noHomog_stepUp"
-      module: "OrdinalStepUp.ErdosRado"
+      module: "OrdinalStepUp.Solution"
       status: "proved"
       note: >-
         Corollary phrasing, existentially quantifying the stepped-up colouring

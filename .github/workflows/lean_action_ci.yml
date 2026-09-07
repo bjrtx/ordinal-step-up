@@ -15,7 +15,7 @@ jobs:
 
       # `Challenge` is kept out of `defaultTargets` so its deliberate `sorry`
       # does not warn on every build. Build it here anyway: it must keep
-      # agreeing with `OrdinalStepUp/ErdosRado.lean`, which is what Comparator
+      # agreeing with `OrdinalStepUp/Solution.lean`, which is what Comparator
       # checks.
       - name: Comparator challenge still builds
         run: lake build Challenge

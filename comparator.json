@@ -1,6 +1,6 @@
 {
   "challenge_module": "OrdinalStepUp.Challenge",
-  "solution_module": "OrdinalStepUp.ErdosRado",
+  "solution_module": "OrdinalStepUp.Solution",
   "theorem_names": [
     "OrdinalStepUp.ErdosRado.noHomog_stepUp"
   ],

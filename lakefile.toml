@@ -1,5 +1,5 @@
 # The Erdős–Rado negative stepping-up lemma for ordinal order types, as a
-# self-contained project: `OrdinalStepUp/ErdosRado.lean` imports nothing but
+# self-contained project: `OrdinalStepUp/Solution.lean` imports nothing but
 # Mathlib, and `OrdinalStepUp/Challenge.lean` restates its main theorem with a
 # `sorry` for Comparator. See `comparator.json` and `formalization.yaml`.
 name = "ordinal_step_up"
@@ -20,9 +20,9 @@ linter.style.openClassical = true
 
 [[lean_lib]]
 name = "OrdinalStepUp"
-roots = ["OrdinalStepUp.ErdosRado"]
+roots = ["OrdinalStepUp.Solution"]
 
-# The Palomar Challenge. `OrdinalStepUp.ErdosRado` serves as the Solution, so
+# The Palomar Challenge. `OrdinalStepUp.Solution` is the development itself, so
 # Comparator checks the development itself rather than a restatement of it.
 # Kept out of `defaultTargets` so its deliberate `sorry` does not warn on every
 # build. Build with `lake build Challenge`.
