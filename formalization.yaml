@@ -10,8 +10,8 @@ project:
     order-type form: if a colouring of the r-subsets of kappa has no
     monochromatic subset of kappa of order type theta, then the stepped-up
     colouring of the (r+1)-subsets of 2^kappa has none either, provided theta
-    is additively indecomposable (meaning a nontrivial power of the first
-    uncountable ordinal).
+    is additively indecomposable (meaning a nontrivial power of omega, the
+    first infinite ordinal).
 
     The construction compares two unrelated orders on 2^kappa -- an arbitrary
     well-order, and the lexicographic order given by the first place two sets
@@ -91,8 +91,8 @@ classification:
 
 status:
   scope: >-
-    Formalization of Theorem 4.18 in (de Graaf 2021), with no sorry and no axioms beyond propext,
-    Classical.choice and Quot.sound.
+    Formalization of Theorem 4.18 in (de Graaf 2021), with no sorry and no
+    axioms beyond propext, Classical.choice and Quot.sound.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: ["propext", "Classical.choice", "Quot.sound"]
@@ -139,6 +139,36 @@ review:
 
 alignment:
   namespace: "OrdinalStepUp.ErdosRado"
+  # Plain-language account of the six definitions Comparator compares
+  # alongside the theorem. All six are declared identically in
+  # OrdinalStepUp/Challenge.lean and OrdinalStepUp/ErdosRado.lean.
+  definitions:
+    - lean: "WO"
+      reads: >-
+        A well-order on the powerset of the ordinals, obtained from the
+        well-ordering theorem. Which one is immaterial: it exists to give
+        subsets of 2^kappa an order type, and no property of it is used.
+    - lean: "ordWO"
+      reads: "The ordinals under their own ordering, as a bundled well-order."
+    - lean: "Mono"
+      reads: >-
+        A set is monochromatic in colour iota for a colouring of r-subsets
+        when every r-element subset of it receives colour iota.
+    - lean: "otpOf"
+      reads: >-
+        The order type of a subset of a well-ordered type: the ordinal of the
+        order the ambient well-order induces on that subset.
+    - lean: "NoHomogOrd"
+      reads: >-
+        The negative arrow kappa -/-> (theta)^r downstairs: no subset of
+        kappa of order type theta is monochromatic for the given colouring.
+        The bound to kappa is essential; without it the condition is
+        unsatisfiable, since the positive Erdos-Rado theorem always supplies a
+        monochromatic set of type theta somewhere among the ordinals.
+    - lean: "NoHomog"
+      reads: >-
+        The same one level up, for subsets of the powerset of kappa, with
+        order types taken along WO.
   statements:
     - source: "de Graaf 2021, Theorem 4.18"
       lean: "OrdinalStepUp.ErdosRado.stepUp_noHomog"
