@@ -1,0 +1,21 @@
+name: Lean Action CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+
+      # `Challenge` is kept out of `defaultTargets` so its deliberate `sorry`
+      # does not warn on every build. Build it here anyway: it must keep
+      # agreeing with `OrdinalStepUp/ErdosRado.lean`, which is what Comparator
+      # checks.
+      - name: Comparator challenge still builds
+        run: lake build Challenge

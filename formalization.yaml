@@ -26,6 +26,11 @@ project:
   responsible_maintainers:
     - "Bruno Jartoux"
 
+# The proof lives here; Challenge.lean is the Comparator statement for the
+# development in this same repository, not a wrapper around one elsewhere.
+repository:
+  role: "substantive-development"
+
 
 sources:
   - title: >-
