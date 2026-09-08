@@ -72,7 +72,7 @@ def NoHomogOrd {μ : Ordinal} (κ : Ordinal) (f : Finset Ordinal → Set.Iio μ)
     (θ : Ordinal) : Prop :=
   ∀ 𝒜 : Set Ordinal, 𝒜 ⊆ Set.Iio κ → otpOf ordWO 𝒜 = θ → ∀ ι, ¬ Mono f r 𝒜 ι
 
-/-- The same one level up, on `𝒫(κ) ≃ 2^κ`: `2^κ ↛ (θ)ʳ⁺¹`. -/
+/-- The same one level up, on `𝒫(κ) ≃ 2^κ`: `2^κ ↛ (θ)ʳ`. -/
 def NoHomog {μ : Ordinal} (κ : Ordinal) (f : Finset (Set Ordinal) → Set.Iio μ) (r : ℕ)
     (θ : Ordinal) : Prop :=
   ∀ 𝒜 : Set (Set Ordinal), 𝒜 ⊆ Set.powerset (Set.Iio κ) → otpOf WO 𝒜 = θ →

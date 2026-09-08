@@ -7,11 +7,15 @@ project:
   name: "Erdős–Rado negative stepping-up for ordinal order types"
   description: >-
     A Lean 4 formalisation of the Erdős–Rado negative stepping-up lemma in its
-    order-type form: if a colouring of the r-subsets of kappa has no
-    monochromatic subset of kappa of order type theta, then the stepped-up
-    colouring of the (r+1)-subsets of 2^kappa has none either, provided theta
-    is additively indecomposable (meaning a nontrivial power of omega, the
-    first infinite ordinal).
+    order-type form, for arities three and above and for at least two colours.
+
+    Fix an ordinal kappa; a colour count mu ≥ 2; and a target order type
+    theta = omega^alpha with alpha > 0, so that theta is additively
+    indecomposable. The theorem proved is, for every natural number r: if some
+    colouring of the (r+3)-subsets of kappa by ordinals below mu admits no
+    monochromatic subset of kappa of order type theta, then some colouring of
+    the (r+4)-subsets of 2^kappa admits none either, using the same number of
+    colours.
 
     The construction compares two unrelated orders on 2^kappa -- an arbitrary
     well-order, and the lexicographic order given by the first place two sets
